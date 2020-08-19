@@ -16,15 +16,11 @@ import com.demo.petclinic.repository.PetTypeRepository;
 @Transactional
 public class PetTypeServiceImpl implements PetTypeService {
 	
+	@Autowired
 	private ModelMapper modelMapper;
     
-	private PetTypeRepository petTypeRepository;
-
 	@Autowired
-    public PetTypeServiceImpl(ModelMapper modelMapper, PetTypeRepository petTypeRepository) {
-        this.modelMapper = modelMapper;
-        this.petTypeRepository = petTypeRepository;
-    }
+	private PetTypeRepository petTypeRepository;
 
 	@Override
 	public List<PetTypeDTO> getAllPetTypes() {

@@ -24,7 +24,7 @@ import com.demo.petclinic.service.AppointmentService;
 @RestController
 @RequestMapping("/appointments")
 public class AppointmentsController {
-	
+
 	@Autowired
 	AppointmentService appointmentService;
 
@@ -32,27 +32,27 @@ public class AppointmentsController {
 	public List<AppointmentDTO> findAllAppointments() {
 		return appointmentService.getAllAppointments();
 	}
-	
+
 	@GetMapping("/{appointmentId}")
 	public AppointmentDTO getPet(@PathVariable Integer appointmentId) {
 		return appointmentService.getAppointment(appointmentId);
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public AppointmentDTO addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
 		Integer appointmentId = appointmentService.saveAppointment(appointmentDTO);
 		return appointmentService.getAppointment(appointmentId);
 	}
-	
+
 	@DeleteMapping("/{appointmentId}")
 	public void deleteAppointment(@PathVariable Integer appointmentId) {
 		appointmentService.deleteAppointment(appointmentId);
 	}
-	
+
 	@ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<String> duplicateEmailException(HttpServletRequest req, DataIntegrityViolationException e) {
-        String errorMessage = "An appointment for the given date/time already exists. Please try again.";
+	public ResponseEntity<String> duplicateEmailException(HttpServletRequest req, DataIntegrityViolationException e) {
+		String errorMessage = "An appointment for the given date/time already exists. Please try again.";
 		return new ResponseEntity<>(errorMessage, HttpStatus.CONFLICT);
-    }
+	}
 }

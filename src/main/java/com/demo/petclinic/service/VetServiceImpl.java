@@ -19,18 +19,14 @@ import com.demo.petclinic.repository.VetRepository;
 @Transactional
 public class VetServiceImpl implements VetService {
 	
+	@Autowired
 	private ModelMapper modelMapper;
     
+	@Autowired
 	private VetRepository vetRepository;
 	
-	private AppointmentRepository appointmentRepository;
-
 	@Autowired
-    public VetServiceImpl(ModelMapper modelMapper, VetRepository vetRepository, AppointmentRepository appointmentRepository) {
-        this.modelMapper = modelMapper;
-        this.vetRepository = vetRepository;
-        this.appointmentRepository = appointmentRepository;
-    }
+	private AppointmentRepository appointmentRepository;
 
 	@Override
 	public List<VetDTO> getAllVets() {
